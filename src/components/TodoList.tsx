@@ -3,8 +3,10 @@ import {Tasks} from "./Tasks";
 import {Title} from "./Title";
 import {Button} from "./Button";
 
+
 export type TasksType = {
     tasks: Array<TasksPropsType>
+    removeTask: (taskId: number) => void
 }
 
 export type TasksPropsType = {
@@ -13,19 +15,19 @@ export type TasksPropsType = {
     isDone: boolean
 }
 
-export const TodoList = ({tasks}: TasksType) => {
+export const TodoList = ({tasks, removeTask}: TasksType) => {
     return (
         <div>
             <Title title={"What to learn"}/>
 
             <input type="text"/>
-            <Button title={"+"} callBack={()=>{}}/>
+            <Button title={"+"}/>
 
-            <Tasks tasks={tasks}/>
+            <Tasks removeTask={removeTask} tasks={tasks}/>
 
-            <Button title={"All"} callBack={()=>{}}/>
-            <Button title={"Active"} callBack={()=>{}}/>
-            <Button title={"Completed"} callBack={()=>{}}/>
+            <Button title={"All"}/>
+            <Button title={"Active"}/>
+            <Button title={"Completed"}/>
         </div>
     );
 };

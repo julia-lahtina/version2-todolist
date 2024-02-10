@@ -17,6 +17,14 @@ code {
 
 }
 
+ul {
+  list-style: none;
+}
+
+.remove {
+  display: flex;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
