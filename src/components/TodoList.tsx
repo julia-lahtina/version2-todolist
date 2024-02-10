@@ -3,7 +3,17 @@ import {Tasks} from "./Tasks";
 import {Title} from "./Title";
 import {Button} from "./Button";
 
-export const TodoList = () => {
+export type TasksType = {
+    tasks: Array<TasksPropsType>
+}
+
+export type TasksPropsType = {
+    id: number
+    title: string
+    isDone: boolean
+}
+
+export const TodoList = ({tasks}: TasksType) => {
     return (
         <div>
             <Title title={"What to learn"}/>
@@ -11,7 +21,7 @@ export const TodoList = () => {
             <input type="text"/>
             <Button title={"+"} callBack={()=>{}}/>
 
-            <Tasks/>
+            <Tasks tasks={tasks}/>
 
             <Button title={"All"} callBack={()=>{}}/>
             <Button title={"Active"} callBack={()=>{}}/>
