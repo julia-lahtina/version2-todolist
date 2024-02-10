@@ -1,11 +1,12 @@
 import React from 'react';
+import {Task} from "./Task";
 
 export const Tasks = () => {
     return (
         <ul>
-            <li><input type="checkbox" checked/> <span>HTML&CSS</span></li>
-            <li><input type="checkbox" checked/> <span>JS</span></li>
-            <li><input type="checkbox"/> <span>React</span></li>
+            <Task title={"HTML&CSS"} isChecked={true}/>
+            <Task title={"JS"} isChecked={true}/>
+            <Task title={"React"} isChecked={false}/>
         </ul>
     );
 };
