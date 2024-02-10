@@ -1,10 +1,11 @@
 import React from 'react';
 import {Tasks} from "./Tasks";
+import {Title} from "./Title";
 
 export const TodoList = () => {
     return (
         <div>
-            <h3>What to learn</h3>
+            <Title title={"What to learn"}/>
             <div>
                 <input type="text"/>
                 <button>+</button>
