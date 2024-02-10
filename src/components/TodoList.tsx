@@ -1,4 +1,5 @@
 import React from 'react';
+import {Tasks} from "./Tasks";
 
 export const TodoList = () => {
     return (
@@ -8,11 +9,7 @@ export const TodoList = () => {
                 <input type="text"/>
                 <button>+</button>
             </div>
-            <ul>
-                <li><input type="checkbox" checked/> <span>HTML&CSS</span></li>
-                <li><input type="checkbox" checked/> <span>JS</span></li>
-                <li><input type="checkbox"/> <span>React</span></li>
-            </ul>
+            <Tasks/>
             <div>
                 <button>All</button>
                 <button>Active</button>
