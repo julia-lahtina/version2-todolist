@@ -8,7 +8,7 @@ type TaskPropsType = {
 
 export const Task = ({task, removeTask}: TaskPropsType) => {
     return (
-            <li key={task.id}>
+            <li>
                 <input type="checkbox" checked={task.isDone}/>
                 <span>{task.title}</span>
                 <button onClick={() => {removeTask(task.id)}}>✖️

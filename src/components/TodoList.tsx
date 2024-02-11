@@ -2,11 +2,13 @@ import React from 'react';
 import {Tasks} from "./Tasks";
 import {Title} from "./Title";
 import {Button} from "./Button";
+import {FilterTasksType} from "../App";
 
 
 export type TasksType = {
     tasks: Array<TasksPropsType>
     removeTask: (taskId: number) => void
+    changeTasks: (value: FilterTasksType) => void
 }
 
 export type TasksPropsType = {
@@ -15,19 +17,19 @@ export type TasksPropsType = {
     isDone: boolean
 }
 
-export const TodoList = ({tasks, removeTask}: TasksType) => {
+export const TodoList = ({tasks, removeTask, changeTasks}: TasksType) => {
     return (
         <div>
             <Title title={"What to learn"}/>
 
             <input type="text"/>
-            <Button title={"+"}/>
+            <button>+</button>
 
-            <Tasks removeTask={removeTask} tasks={tasks}/>
+            <Tasks changeTasks={changeTasks} removeTask={removeTask} tasks={tasks}/>
 
-            <Button title={"All"}/>
-            <Button title={"Active"}/>
-            <Button title={"Completed"}/>
+            <Button callBack={() => changeTasks} title={"All"}/>
+            <Button callBack={() => changeTasks} title={"Active"}/>
+            <Button callBack={() => changeTasks} title={"Completed"}/>
         </div>
     );
 };
