@@ -27,9 +27,9 @@ export const TodoList = ({tasks, removeTask, changeTasks}: TasksType) => {
 
             <Tasks changeTasks={changeTasks} removeTask={removeTask} tasks={tasks}/>
 
-            <Button callBack={() => changeTasks} title={"All"}/>
-            <Button callBack={() => changeTasks} title={"Active"}/>
-            <Button callBack={() => changeTasks} title={"Completed"}/>
+            <Button callBack={() => changeTasks("all")} title={"All"}/>
+            <Button callBack={() => changeTasks("active")} title={"Active"}/>
+            <Button callBack={() => changeTasks("completed")} title={"Completed"}/>
         </div>
     );
 };

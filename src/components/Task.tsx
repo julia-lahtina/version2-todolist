@@ -1,5 +1,6 @@
 import React from 'react';
 import {TasksPropsType} from "./TodoList";
+import {Button} from "./Button";
 
 type TaskPropsType = {
     task: TasksPropsType
@@ -8,11 +9,10 @@ type TaskPropsType = {
 
 export const Task = ({task, removeTask}: TaskPropsType) => {
     return (
-            <li>
-                <input type="checkbox" checked={task.isDone}/>
-                <span>{task.title}</span>
-                <button onClick={() => {removeTask(task.id)}}>✖️
-                </button>
-            </li>
+        <li>
+            <input type="checkbox" checked={task.isDone}/>
+            <span>{task.title}</span>
+            <Button title={"✖️"} callBack={() => removeTask(task.id)}/>
+        </li>
     );
 };

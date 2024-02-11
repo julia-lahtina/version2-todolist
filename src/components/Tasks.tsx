@@ -7,7 +7,7 @@ export const Tasks = ({tasks, removeTask}: TasksType) => {
         <ul>
             {tasks.map((task: TasksPropsType) => {
                 return (
-                        <Task key={task.id} removeTask={removeTask} task={task}/>
+                    <Task key={task.id} removeTask={removeTask} task={task}/>
                 )
             })}
         </ul>

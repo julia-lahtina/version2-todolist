@@ -30,7 +30,7 @@ function App() {
         tasksTodoList = tasks.filter(t => t.isDone)
     }
 
-    function changeTasks (value: FilterTasksType) {
+    function changeTasks(value: FilterTasksType) {
         setFilterTasks(value)
     }
 
