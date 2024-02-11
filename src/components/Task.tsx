@@ -1,18 +1,18 @@
 import React from 'react';
+import {TasksPropsType} from "./TodoList";
 
-export type TaskPropsType = {
-    title: string
-    isChecked: boolean
-    removeTask: (taskId: number) => void
+type TaskPropsType = {
+    task: TasksPropsType
+    removeTask: (id: number) => void
 }
-export const Task = ({title, isChecked, removeTask}: TaskPropsType) => {
+
+export const Task = ({task, removeTask}: TaskPropsType) => {
     return (
-        <>
-            <li>
-                <input type="checkbox" checked={isChecked}/>
-                <span>{title}</span>
+            <li key={task.id}>
+                <input type="checkbox" checked={task.isDone}/>
+                <span>{task.title}</span>
+                <button onClick={() => {removeTask(task.id)}}>✖️
+                </button>
             </li>
-            <button onClick={() => {}}>✖️</button>
-        </>
     );
 };

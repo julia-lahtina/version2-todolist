@@ -4,7 +4,7 @@ import {TodoList} from "./components/TodoList";
 
 function App() {
 
-    const tasks = [
+    let tasks = [
         {id: 1, title: "HTML&CSS", isDone: true},
         {id: 2, title: "JS", isDone: true},
         {id: 3, title: "React", isDone: false},
@@ -13,7 +13,8 @@ function App() {
     ]
 
     function removeTask(id: number) {
-        return tasks.filter(task => task.id !== id)
+        tasks = tasks.filter(task => task.id !== id)
+        console.log(tasks)
     }
 
     return (

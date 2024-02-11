@@ -8,7 +8,7 @@ export const Tasks = ({tasks, removeTask}: TasksType) => {
             {tasks.map((task: TasksPropsType) => {
                 return (
                     <div className={"remove"}>
-                        <Task key={task.id} title={task.title} isChecked={task.isDone}/>
+                        <Task removeTask={removeTask} task={task}/>
                     </div>
                 )
             })}
