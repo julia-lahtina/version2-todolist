@@ -2,8 +2,8 @@ import React from 'react';
 import {Book} from './Book';
 import {BooksType} from '../App';
 
-export const BooksList = ({books}: BooksType) => {
+export const BooksList = ({books, deleteBook}: BooksType) => {
     return (
-        <Book books={books}/>
+        <Book deleteBook={deleteBook} books={books}/>
     );
 };
