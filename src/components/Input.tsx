@@ -5,7 +5,7 @@ export type InputPropsType = {
     newValue: string
     setNewInputValue: (newValue: string) => void
 }
-export const Input = ({inputType, setNewInputValue, newValue}: InputPropsType) => {
+export const Input = ({setNewInputValue, newValue, inputType}: InputPropsType) => {
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setNewInputValue(e.currentTarget.value)
