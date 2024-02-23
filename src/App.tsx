@@ -1,42 +1,99 @@
-import React, {useState} from 'react';
+import React, {KeyboardEvent, useState} from 'react';
 import './App.css';
-import {TodoList} from "./components/TodoList";
+import {v1} from 'uuid';
+import {Button} from './components/Button';
+import {Input} from './components/Input';
+import {BooksList} from './components/BooksList';
 
-export type FilterTasksType = "all" | "active" | "completed"
+export type BooksType = {
+    books: Array<BookPropsType>
+    deleteBook: (BookId: string) => void
+    changeStatus: (status: boolean, id: string) => void
+}
+
+export type BookPropsType = {
+    id: string
+    bookName: string
+    isRead: boolean
+}
+
+type FilterPropsType = 'все' | 'прочитанные' | 'непрочитанные'
 
 function App() {
 
-    let [tasks, setTasks] = useState([
-        {id: 1, title: "HTML&CSS", isDone: true},
-        {id: 2, title: "JS", isDone: true},
-        {id: 3, title: "React", isDone: false},
-        {id: 4, title: "Rest API", isDone: false},
-        {id: 5, title: "GraphQL", isDone: false},
+    const [books, setBooks] = useState<BookPropsType[]>([
+        {id: v1(), bookName: 'Преступление и наказание', isRead: true},
+        {id: v1(), bookName: 'Мертвые души', isRead: true},
+        {id: v1(), bookName: 'Человек в футляре', isRead: true},
+        {id: v1(), bookName: 'Война и мир', isRead: false},
+        {id: v1(), bookName: 'Горе от ума', isRead: true},
+        {id: v1(), bookName: 'Мастер и маргарита', isRead: false},
+        {id: v1(), bookName: 'Капитанская дочка', isRead: false},
+        {id: v1(), bookName: 'Маленький принц', isRead: true},
     ])
+    const [newInputValue, setNewInputValue] = useState('')
+    const [filter, setFilter] = useState<FilterPropsType>('все')
+    const [isCollapsed, setIsCollapsed] = useState<boolean>(false)
 
-    function removeTask(id: number) {
-        let tasksFiltered = tasks.filter(task => task.id !== id)
-        setTasks(tasksFiltered)
+
+    const addBook = () => {
+        const newBook = {
+            id: v1(),
+            bookName: newInputValue,
+            isRead: false
+        };
+        setBooks([newBook, ...books]);
+        setNewInputValue('')
+    }
+    const deleteBook = (BookId: string) => {
+        const undeletedBooks = books.filter(b => b.id !== BookId);
+        setBooks(undeletedBooks)
+    }
+
+    const changeFilterBooks = (filter: FilterPropsType) => {
+        setFilter(filter);
+    }
+    const filterBooks = (filter: FilterPropsType) => {
+        let filteredBooks: Array<BookPropsType> = [];
+        filter === 'прочитанные'
+            ? filteredBooks = books.filter(b => b.isRead)
+            : filter === 'непрочитанные'
+                ? filteredBooks = books.filter(b => !b.isRead)
+                : filteredBooks = books;
+
+        return filteredBooks;
+    }
+
+    const booksFilter: Array<BookPropsType> = filterBooks(filter);
+
+    const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            addBook()
+        }
     }
 
 
-    let [filterTasks, setFilterTasks] = useState<FilterTasksType>("all")
-    let tasksTodoList = tasks
-
-    if (filterTasks === "active") {
-        tasksTodoList = tasks.filter(t => !t.isDone)
-    }
-    if (filterTasks === "completed") {
-        tasksTodoList = tasks.filter(t => t.isDone)
+    const changeStatus = (status: boolean, id: string) => {
+        const newBookStatus = books.map(b => b.id === id ? {...b, isRead: status} : b);
+        setBooks(newBookStatus);
     }
 
-    function changeTasks(value: FilterTasksType) {
-        setFilterTasks(value)
+    const collapsedBooks = () => {
+
     }
+
 
     return (
-        <div className="App">
-            <TodoList tasks={tasksTodoList} changeTasks={changeTasks} removeTask={removeTask}/>
+        <div>
+            <Input onKeyPress={onKeyPress} newValue={newInputValue} setNewInputValue={setNewInputValue}
+                   inputType={'text'}/>
+            <Button buttonName={'Добавить книгу'} callBack={addBook}/>
+            <div><Button buttonName={'Close'} callBack={collapsedBooks}/></div>
+            <h2>Список книг:</h2>
+            <BooksList books={booksFilter} deleteBook={deleteBook} changeStatus={changeStatus}/>
+            <Button buttonName={'Все книги'} callBack={() => changeFilterBooks('все')}/>
+            <Button buttonName={'Прочитанные книги'} callBack={() => changeFilterBooks('прочитанные')}/>
+            <Button buttonName={'Непрочитанные книги'} callBack={() => changeFilterBooks('непрочитанные')}/>
         </div>
     );
 }
