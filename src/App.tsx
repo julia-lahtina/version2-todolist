@@ -33,7 +33,7 @@ function App() {
     ])
     const [newInputValue, setNewInputValue] = useState('')
     const [filter, setFilter] = useState<FilterPropsType>('все')
-    const [isCollapsed, setIsCollapsed] = useState<boolean>(false)
+    const [collapsed, setCollapsed] = useState<boolean>(false)
 
 
     const addBook = () => {
@@ -67,8 +67,13 @@ function App() {
     const booksFilter: Array<BookPropsType> = filterBooks(filter);
 
     const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            addBook()
+
+        if (disabledButton) {
+
+        } else {
+            if (e.key === 'Enter') {
+                addBook()
+            }
         }
     }
 
@@ -78,22 +83,42 @@ function App() {
         setBooks(newBookStatus);
     }
 
-    const collapsedBooks = () => {
-
-    }
+    const disabledButton = newInputValue === '';
+    const trimmedValue = newInputValue.trim();
 
 
     return (
-        <div>
-            <Input onKeyPress={onKeyPress} newValue={newInputValue} setNewInputValue={setNewInputValue}
-                   inputType={'text'}/>
-            <Button buttonName={'Добавить книгу'} callBack={addBook}/>
-            <div><Button buttonName={'Close'} callBack={collapsedBooks}/></div>
-            <h2>Список книг:</h2>
-            <BooksList books={booksFilter} deleteBook={deleteBook} changeStatus={changeStatus}/>
-            <Button buttonName={'Все книги'} callBack={() => changeFilterBooks('все')}/>
-            <Button buttonName={'Прочитанные книги'} callBack={() => changeFilterBooks('прочитанные')}/>
-            <Button buttonName={'Непрочитанные книги'} callBack={() => changeFilterBooks('непрочитанные')}/>
+        <div className={'all-wrapper'}>
+            <div className={'content-wrapper'}>
+                <div>
+                    <Input onKeyPress={onKeyPress} newValue={newInputValue} setNewInputValue={setNewInputValue}
+                           inputType={'text'}/>
+                    <Button buttonName={'Добавить книгу'} callBack={addBook} disabled={disabledButton}
+                            className={disabledButton ? 'button-disabled' : 'button-active'} style={{color: 'white'}}/>
+
+                    <div>
+                        <Button buttonName={collapsed ? 'Open' : 'Close'} callBack={() => setCollapsed(!collapsed)}
+                                className={'button-default'} style={{color: 'white'}}/>
+                    </div>
+                    {collapsed
+                        ? null
+                        : <>
+                            <h2 style={{color: 'white'}}>Список книг:</h2>
+                            <div className={'book-list'}><BooksList books={booksFilter} deleteBook={deleteBook} changeStatus={changeStatus}/></div>
+                            <div className={'btn-wrapper'}>
+                                <Button buttonName={'Все книги'} callBack={() => changeFilterBooks('все')}
+                                        className={filter === 'все' ? 'button-active' : 'button-default'} style={{color: 'white'}}/>
+                                <Button buttonName={'Прочитанные книги'}
+                                        callBack={() => changeFilterBooks('прочитанные')}
+                                        className={filter === 'прочитанные' ? 'button-active' : 'button-default'} style={{color: 'white'}}/>
+                                <Button buttonName={'Непрочитанные книги'}
+                                        callBack={() => changeFilterBooks('непрочитанные')}
+                                        className={filter === 'непрочитанные' ? 'button-active' : 'button-default'} style={{color: 'white'}}/>
+                            </div>
+                        </>
+                    }
+                </div>
+            </div>
         </div>
     );
 }
