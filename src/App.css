@@ -5,6 +5,7 @@ body {
     sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #e1d7fc;
 }
 
 code {
@@ -15,6 +16,29 @@ code {
 
 .App {
 
+}
+
+.all-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.content-wrapper {
+    border: 5px solid #c6b7ef;
+    max-width: 60vh;
+    width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px #b5a2e8;
+    margin-top: 20px;
+}
+
+.book-list {
+    border: 1px solid #b5a2e8;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    min-height: 40vh;
+    height: 100%;
 }
 
 ul {
@@ -33,38 +57,51 @@ ul {
     }
 }
 
-
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
-}
-
-.App-header {
-    background-color: #282c34;
-    min-height: 100vh;
+.btn-wrapper {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+    gap: 10px
 }
 
-.App-link {
-    color: #61dafb;
+.button-active {
+    background-color: #0ff30f;
+    border-radius: 5px;
+    border: none;
+    font-size: 15px;
+
+    &:hover {
+        background-color: black;
+        color: white;
+        cursor: pointer;
+        border: none;
+    }
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
+.button-disabled {
+    background-color: #4e3194;
+    opacity: 0.2;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+
+    &:hover {
+        background-color: black;
+        color: white;
+        cursor: pointer;
+        border: none;
     }
 }
+
+.button-default {
+    background-color: #df63ef;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+
+    &:hover {
+        background-color: black;
+        color: white;
+        cursor: pointer;
+        border: none;
+    }
+}
+
